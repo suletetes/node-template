@@ -34,8 +34,7 @@ async function createConnection(connectionConfig) {
       }
       connectionResult.connection = connection;
     } catch (e) {
-      // Todo: Proper handler?
-      throw new Error(e.message);
+      console.error('MongoDB connection error:', e.message);
     }
   }
   return connectionResult;
