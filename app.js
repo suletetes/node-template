@@ -83,4 +83,9 @@ ENDPOINT_CONFIGS.forEach((config) => {
   setupEndpointHandlers(config.path, config.options);
 });
 
-server.startServer();
+// Start server only when running directly (not in serverless)
+if (!process.env.VERCEL) {
+  server.startServer();
+}
+
+module.exports = server;
