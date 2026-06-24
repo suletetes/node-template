@@ -3,7 +3,21 @@
   "builds": [
     {
       "src": "api/index.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "core/**",
+          "endpoints/**",
+          "services/**",
+          "models/**",
+          "repository/**",
+          "messages/**",
+          "middlewares/**",
+          "mock-models/**",
+          "notification/**",
+          "workers/**"
+        ]
+      }
     }
   ],
   "routes": [
