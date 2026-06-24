@@ -8,9 +8,18 @@ const { createConnection } = require('@app-core/mongoose');
 
 const canLogEndpointInformation = process.env.CAN_LOG_ENDPOINT_INFORMATION;
 
-createConnection({
-  uri: process.env.MONGODB_URI,
-});
+// In serverless, we need to cache the connection promise
+let connectionPromise;
+function ensureConnection() {
+  if (!connectionPromise) {
+    connectionPromise = createConnection({
+      uri: process.env.MONGODB_URI,
+    });
+  }
+  return connectionPromise;
+}
+
+ensureConnection();
 
 const server = createServer({
   port: process.env.PORT,
